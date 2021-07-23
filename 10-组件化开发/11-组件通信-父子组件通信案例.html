@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <cpn :pnum1="num1" :pnum2="num2" @num1change="vuenum1change" @num2change="vuenum2change"></cpn>
+</div>
+
+<template id="cpn">
+  <div>
+    <p>props-pnum1: {{pnum1}}</p>
+    <p>data-dnum1: {{dnum1}}</p>
+    <p>
+      <!--<input type="text" v-model="pnum1">-->
+      <input type="text" :value="dnum1" @input="num1Input">
+    </p>
+    <p>------</p>
+    <p>props-pnum2: {{pnum2}}</p>
+    <p>data-dunum2: {{dnum2}}</p>
+    <p>
+      <!--<input type="text" v-model="pnum2">-->
+      <input type="text" :value="dnum2" @input="num2Input">
+    </p>
+  </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      num1: 1,
+      num2: 0,
+    },
+    methods: {
+      vuenum1change(value) {
+        this.num1 = value
+      },
+      vuenum2change(value) {
+        this.num2 = value
+      }
+    },
+    components: {
+      cpn: {
+        template: '#cpn',
+        props: {
+          pnum1: Number,
+          pnum2: Number,
+        },
+        data() {
+          return {
+            dnum1: this.pnum1,
+            dnum2:  this.pnum2
+          }
+        },
+        methods: {
+          // input事件
+          num1Input(event) {
+            // 1.把data的num1转换为输入框同步数据
+            this.dnum1 = event.target.value;
+            // 2.发射自定义事件，把data中的num1给父组件中的num1change方法去执行
+            this.$emit('num1change', this.dnum1);
+            // 3.把data中的num2改成num1的100倍，同时发射自定义事件，是num2的值同步更新
+            this.dnum2 = this.dnum1 * 100
+            this.$emit('num2change', this.dnum2)
+
+          },
+          num2Input(event) {
+            this.dnum2 = event.target.value;
+            this.$emit('num2change', this.dnum2);
+            this.dnum1 = this.dnum2 / 100
+            this.$emit('num1change', this.dnum1)
+          }
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>

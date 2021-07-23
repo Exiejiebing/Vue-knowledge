@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  // 1. 参数问题
+  // 1.1 放入两个参数
+  import {num1, num2} from "../../12-前端模块化/export";
+
+  const sum = (num1, num2) => {
+    return num1 + num2
+  }
+  // 1.2 放入一个参数
+  const power = (num) => {
+    return num * num
+  }
+
+  // 2. 函数中的代码数量问题
+  // 2.1 函数代码块中多行代码
+  const test = () => {
+    // 1. 打印Hello World
+    console.log('Hello World');
+
+    // 2.打印Hello Vuejs
+    console.log('Hello Vuejs');
+  }
+
+  // 2.2 函数代码块中只有一行代码
+  /*const mul = (num1, num2) => {
+    return num1 * num2
+  }*/
+  const mul = (num1, num2) => num1 * num2
+
+  /*const demo = () => {
+    console.log('Hello World');
+  }*/
+  const demo = () => console.log('Hello World')
+</script>
+</body>
+</html>

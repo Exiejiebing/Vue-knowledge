@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      // 成功的时候调用resolve
+      //resolve('Hello World')
+
+      // 失败的时候调用reject
+      reject('error')
+    }, 1000)
+  }).then(data => {
+    // 成功处理
+    // 执行100行代码
+    console.log(data);
+    console.log(data);
+    console.log(data);
+  },  err => {
+    // 失败处理
+    console.log(err);
+  })
+</script>
+</body>
+</html>

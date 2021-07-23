@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <!--用v-bind绑定数据-->
+  <cpn :cmovies="movies" :cmessage="message"></cpn>
+</div>
+
+<template id="cpn">
+  <div>
+    <ul>
+      <li v-for="item in cmovies">{{item}}</li>
+    </ul>
+    {{cmessage}}
+  </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+  const  cpn = {
+    template: '#cpn',
+    // 数组类型
+    // props: ['cmovies', 'cmessage'],
+    // 对象类型
+    props: {
+      // 1.类型限制
+      /*cmovies: Array,
+      cmessage: String,*/
+
+      // 2.提供一些默认值，以及必传值
+      cmessage: {
+        type: String,
+        default: 'nhljkl',
+        required: true
+      },
+      // 类型是对象或者数组时，默认值必须是一个函数
+      cmovies: {
+        type: Array,
+        // Vue2 5.1.7一下可以使用数组，不会报错
+        // default: [],
+        default() {
+          return []
+        }
+      }
+    }
+  }
+
+
+  // root组件
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好啊',
+      movies: ['你好李焕英', '海贼王', '大话西游'],
+    },
+    components: {
+      cpn
+    }
+  })
+</script>
+</body>
+</html>

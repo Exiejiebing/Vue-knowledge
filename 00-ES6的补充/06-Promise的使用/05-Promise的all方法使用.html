@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  /*// 请求一 和 请求二  执行完之后  才能执行请求三
+  let res1 = false
+  let res2 = false
+  $.ajax({
+    url: 'url1',
+    success: function () {
+      console.log('结果1');
+      res1 = true
+      handelResult()
+    }
+  })
+  $.ajax({
+    url: 'url2',
+    success: function () {
+      console.log('结果2');
+      res2 = true
+      handelResult()
+    }
+  })
+  // 执行请求三
+  function handelResult(){
+    if(res1 && res2) {
+      // 执行请求三
+    }
+  }*/
+
+  Promise.all([
+    /*new Promise((resolve, reject) => {
+      $.ajax({
+        url: 'url1',
+        success: function (data) {
+          resolve(data)
+        }
+      })
+    }),
+    new Promise((resolve, reject) => {
+      $.ajax({
+        url: 'url2',
+        success: function (data) {
+          resolve(data)
+        }
+      })
+    })*/
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('Hello World')
+      }, 2000)
+    }),
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('Hello Python')
+      }, 1000)
+    })
+  ]).then(results => {
+    // results[0]：第一个Promise返回结果
+    // results[1]: 第二个Promise返回结果
+    console.log(results);
+  })
+
+</script>
+</body>
+</html>
